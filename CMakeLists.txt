@@ -38,8 +38,12 @@ set(STEST_SRCS
     include/TestFramework.h
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wextra-semi \
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wextra-semi \
                         -O0 -g -fsanitize=address -fno-omit-frame-pointer")
+endif()
 
 add_executable(serializer ${SRCS})
 add_executable(parser_tests ${PTEST_SRCS})
