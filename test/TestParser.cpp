@@ -27,6 +27,13 @@ void check_parser(const std::string& input, ListNode* expected) {
 	std::remove("inlet.in");
 }
 
+void test_empty() {
+	ListNode* node= nullptr;
+
+	std::string input= "";
+	check_parser(input, node);
+}
+
 void test_one_node() {
 	ListNode* node= new ListNode;
 	node->data= "Hello World";
@@ -170,6 +177,7 @@ void test_with_non_ascii() {
 int main() {
 	auto& runner= TestRunner::getInstance();
 
+	runner.runTest("test_empty", []() { test_empty(); });
 	runner.runTest("test_one_node", []() { test_one_node(); });
 	runner.runTest("test_two_nodes", []() { test_two_nodes(); });
 	runner.runTest("test_three_nodes", []() { test_three_nodes(); });
