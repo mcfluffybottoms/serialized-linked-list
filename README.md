@@ -24,13 +24,28 @@ C++20, cmake 3.8.
 
 ## Сборка
 
-Для сборки проекта используется CMake:
+Для сборки проекта используется CMake.
 
+Сборка тестировалась на Ubuntu (GCC 13)
 ```
 mkdir build && cd build
 cmake ..
 make
 ```
+Windows (MSVC 19.44.35213.0),
+```
+mkdir build && cd build
+cmake ..
+cmake --build .
+```
+и Mingw(GCC 13).
+```
+mkdir build && cd build
+cmake -G"Ninja" .. 
+ninja
+```
+
+Для поддержки Mingw были убраны флаги санитайзера (-fsanitize=address -fno-omit-frame-pointer).
 
 ## Примечание
 Для тестирования использовалась собственная простая header-only реализация системы, позволяющая ограничиться использованием только стандартной библиотеки C++.

@@ -41,9 +41,13 @@ set(STEST_SRCS
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wextra-semi \
-                        -O0 -g -fsanitize=address -fno-omit-frame-pointer")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra \
+                        -O0 -g")
+    if(NOT MINGW)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra-semi -fsanitize=address -fno-omit-frame-pointer")
+    endif()
 endif()
+
 
 add_executable(serializer ${SRCS})
 add_executable(parser_tests ${PTEST_SRCS})
