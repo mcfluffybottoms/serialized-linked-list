@@ -1,4 +1,4 @@
-cmake_minimum_required(3.8)
+cmake_minimum_required(VERSION 3.8)
 
 project(serialized-linked-list VERSION 1.0.0 LANGUAGES CXX)
 
@@ -7,10 +7,40 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SRCS
     src/main.cpp
+    src/App.hpp
+    src/App.cpp
     src/LinkedList.hpp
-    src/LinkedList.cpp
+    src/LinkedListSerializer.hpp
+    src/LinkedListSerializer.cpp
     src/Parser.hpp
     src/Parser.cpp
 )
 
+set(PTEST_SRCS
+    test/TestParser.cpp
+    test/TestUtils.hpp
+    src/LinkedList.hpp
+    src/LinkedListSerializer.hpp
+    src/LinkedListSerializer.cpp
+    src/Parser.hpp
+    src/Parser.cpp
+    include/TestFramework.h
+)
+
+set(STEST_SRCS
+    test/TestSerializer.cpp
+    test/TestUtils.hpp
+    src/LinkedList.hpp
+    src/LinkedListSerializer.hpp
+    src/LinkedListSerializer.cpp
+    src/Parser.hpp
+    src/Parser.cpp
+    include/TestFramework.h
+)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wextra-semi \
+                        -O0 -g -fsanitize=address -fno-omit-frame-pointer")
+
 add_executable(serializer ${SRCS})
+add_executable(parser_tests ${PTEST_SRCS})
+add_executable(serializer_tests ${STEST_SRCS})
